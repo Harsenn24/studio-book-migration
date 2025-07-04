@@ -34,6 +34,7 @@ return new class extends Migration
             $table->unsignedBigInteger('village_id');
             $table->unsignedBigInteger('postal_code_id');
             $table->string('addresses');
+            $table->longText('gmaps')->nullable();
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
