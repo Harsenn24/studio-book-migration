@@ -16,9 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->text('qr_image')->nullable();
+            $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
+
+            $table->foreign('created_by')->references('id')->on('users');
+
         });
 
 
@@ -39,18 +42,6 @@ return new class extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->foreign('district_id')->references('id')->on('districts');
             $table->foreign('postal_code_id')->references('id')->on('postal_codes');
-        });
-
-        Schema::create('studio_operation_times', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('studio_id');
-            $table->string('type');
-            $table->string('open_time');
-            $table->string('close_time');
-            $table->unsignedBigInteger('created_at');
-            $table->unsignedBigInteger('updated_at');
-
-            $table->foreign('studio_id')->references('id')->on('studios');
         });
 
         Schema::create('studio_prices', function (Blueprint $table) {
@@ -86,13 +77,6 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_at');
 
             $table->foreign('studio_id')->references('id')->on('studios');
-        });
-
-        Schema::create('equipments', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('created_at');
-            $table->unsignedBigInteger('updated_at');
         });
 
         Schema::create('studio_equipments', function (Blueprint $table) {
