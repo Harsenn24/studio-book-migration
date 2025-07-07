@@ -13,16 +13,21 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid');
             $table->foreignId('user_id');
-            $table->unsignedBigInteger('start_time');
-            $table->unsignedBigInteger('end_time');
             $table->unsignedBigInteger('studio_id');
-            $table->enum('status', ['booked', 'cancelled'])->default('booked');
+            $table->unsignedBigInteger('date_id');
+            $table->unsignedBigInteger('studio_operation_time_id');
+            $table->enum('status', ['booked', 'cancelled', 'pending'])->default('booked');
+
+
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
-            $table->foreign('studio_id')->references('id')->on('studios');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('date_id')->references('id')->on('dates');
+            $table->foreign('studio_operation_time_id')->references('id')->on('studio_operation_times');
 
         });
     }

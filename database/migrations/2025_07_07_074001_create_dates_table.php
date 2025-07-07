@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hours', function (Blueprint $table) {
-            $table->unsignedTinyInteger('id')->primary();
-            $table->string('hour_time', 5); // format 'HH:MM'
+        Schema::create('dates', function (Blueprint $table) {
+            $table->id();
+            $table->date('date');       // format asli: yyyy-mm-dd, untuk filter
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hours');
+        Schema::dropIfExists('dates');
     }
 };

@@ -18,13 +18,11 @@ class HoursTableSeeder extends Seeder
         $hours = [];
 
         for ($i = 0; $i < 24; $i++) {
-            $start = sprintf('%02d:00', $i);
-            $end = sprintf('%02d:00', $i);// 23:00 -> 00:00
+            $hour_time = sprintf('%02d:00', $i);
 
             $hours[] = [
                 'id' => $i + 1,
-                'start_time' => $start,
-                'end_time' => $end,
+                'hour_time' => $hour_time,
             ];
         }
 
