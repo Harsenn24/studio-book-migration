@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('studio_operation_times', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('studio_id');
+            $table->unsignedBigInteger('date_id');
             $table->unsignedTinyInteger('start_hour_id');
             $table->unsignedTinyInteger('end_hour_id');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
             $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('date_id')->references('id')->on('dates');
             $table->foreign('start_hour_id')->references('id')->on('hours');
             $table->foreign('end_hour_id')->references('id')->on('hours');
 
