@@ -15,19 +15,17 @@ return new class extends Migration
         Schema::create('studio_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('studio_id');
-            $table->unsignedBigInteger('studio_number_id')->nullable();
-            $table->string('type');
-            $table->string('path');
-            $table->string('mime');
-            $table->text('meta')->nullable();
+            $table->unsignedBigInteger('studio_number_id');
+            $table->unsignedBigInteger('document_id');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
             $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('document_id')->references('id')->on('document_files');
             $table->foreign('studio_number_id')->references('id')->on('studio_numbers');
 
             $table->unique(
-                ['studio_id', 'studio_number_id', 'type'],
+                ['studio_id', 'studio_number_id', 'document_id'],
                 'unique_studio_document'
             );
         });
