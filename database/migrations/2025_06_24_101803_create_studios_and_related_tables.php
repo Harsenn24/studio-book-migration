@@ -45,30 +45,6 @@ return new class extends Migration
             $table->foreign('postal_code_id')->references('id')->on('postal_codes');
         });
 
-        Schema::create('studio_prices', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('studio_id');
-            $table->string('type');
-            $table->string('price');
-            $table->unsignedBigInteger('created_at');
-            $table->unsignedBigInteger('updated_at');
-
-            $table->foreign('studio_id')->references('id')->on('studios');
-        });
-
-        Schema::create('studio_documents', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('studio_id');
-            $table->string('type');
-            $table->string('path');
-            $table->string('mime');
-            $table->text('meta')->nullable();
-            $table->unsignedBigInteger('created_at');
-            $table->unsignedBigInteger('updated_at');
-
-            $table->foreign('studio_id')->references('id')->on('studios');
-        });
-
         Schema::create('studio_contact_persons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('studio_id');
@@ -78,25 +54,7 @@ return new class extends Migration
             $table->unsignedBigInteger('updated_at');
 
             $table->foreign('studio_id')->references('id')->on('studios');
-        });
-
-        Schema::create('studio_equipments', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('studio_id');
-            $table->unsignedBigInteger('equipment_id');
-            $table->string('quntity')->nullable();
-            $table->unsignedBigInteger('created_at');
-            $table->unsignedBigInteger('updated_at');
-            $table->foreign('studio_id')->references('id')->on('studios');
-            $table->foreign('equipment_id')->references('id')->on('equipments');
-
-
-        });
-
-
-
-
-        
+        });        
     }
 
     /**
