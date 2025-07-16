@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('studio_operation_times', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('studio_id');
-            $table->unsignedBigInteger('studio_number_id');
             $table->unsignedBigInteger('studio_price_id');
             $table->unsignedBigInteger('date_id');
             $table->unsignedTinyInteger('start_hour_id');
@@ -22,18 +20,15 @@ return new class extends Migration
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
-            $table->foreign('studio_id')->references('id')->on('studios');
-            $table->foreign('studio_number_id')->references('id')->on('studio_numbers');
             $table->foreign('studio_price_id')->references('id')->on('studio_prices');
             $table->foreign('date_id')->references('id')->on('dates');
             $table->foreign('start_hour_id')->references('id')->on('hours');
             $table->foreign('end_hour_id')->references('id')->on('hours');
 
             $table->unique(
-                ['studio_id', 'studio_number_id', 'studio_price_id', 'date_id', 'start_hour_id', 'end_hour_id'],
+                ['studio_price_id', 'date_id', 'start_hour_id', 'end_hour_id'],
                 'unique_studio_operation'
             );
-
         });
     }
 
