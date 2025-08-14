@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('studio_operation_times', function (Blueprint $table) {
+        //
+        Schema::create('studio_equipments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('studio_id');
             $table->unsignedBigInteger('studio_number_id');
-            $table->unsignedBigInteger('date_id');
-            $table->unsignedTinyInteger('start_hour_id');
-            $table->unsignedTinyInteger('end_hour_id');
+            $table->unsignedBigInteger('equipment_id');
+            $table->string('quntity')->nullable();
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
+            $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('equipment_id')->references('id')->on('equipments');
             $table->foreign('studio_number_id')->references('id')->on('studio_numbers');
-            $table->foreign('date_id')->references('id')->on('dates');
-            $table->foreign('start_hour_id')->references('id')->on('hours');
-            $table->foreign('end_hour_id')->references('id')->on('hours');
 
             $table->unique(
-                ['studio_number_id', 'date_id', 'start_hour_id', 'end_hour_id'],
-                'unique_studio_operation'
+                ['studio_id', 'studio_number_id', 'equipment_id'],
+                'unique_studio_equipment'
             );
         });
     }
@@ -37,6 +37,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('studio_operation_times');
+        //
+        Schema::dropIfExists('studio_equipments');
     }
 };

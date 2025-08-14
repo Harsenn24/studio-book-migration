@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('transaction_id');
-            $table->unsignedBigInteger('studio_operation_time_id');
+            $table->uuid('uuid')->unique();
+            $table->unsignedBigInteger('user_id');
+            $table->string('total_amount');
             $table->enum('status', ['booked', 'cancelled', 'pending'])->default('pending');
             $table->unsignedBigInteger('created_at');
-            $table->unsignedBigInteger('updated_at');
+            $table->unsignedBigInteger('updated_at')->nullable();
 
-            $table->foreign('studio_operation_time_id')->references('id')->on('studio_operation_times');
-            $table->foreign('transaction_id')->references('id')->on('transactions');
+            $table->foreign('user_id')->references('id')->on('users');
 
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('transactions');
     }
 };

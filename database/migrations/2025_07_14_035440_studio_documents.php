@@ -11,23 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('studio_operation_times', function (Blueprint $table) {
+        //
+        Schema::create('studio_documents', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('studio_id');
             $table->unsignedBigInteger('studio_number_id');
-            $table->unsignedBigInteger('date_id');
-            $table->unsignedTinyInteger('start_hour_id');
-            $table->unsignedTinyInteger('end_hour_id');
+            $table->unsignedBigInteger('document_id');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
+            $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('document_id')->references('id')->on('document_files');
             $table->foreign('studio_number_id')->references('id')->on('studio_numbers');
-            $table->foreign('date_id')->references('id')->on('dates');
-            $table->foreign('start_hour_id')->references('id')->on('hours');
-            $table->foreign('end_hour_id')->references('id')->on('hours');
 
             $table->unique(
-                ['studio_number_id', 'date_id', 'start_hour_id', 'end_hour_id'],
-                'unique_studio_operation'
+                ['studio_id', 'studio_number_id', 'document_id'],
+                'unique_studio_document'
             );
         });
     }
@@ -37,6 +36,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('studio_operation_times');
+        //
+        Schema::dropIfExists('studio_documents');
+
     }
 };
