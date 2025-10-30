@@ -21,7 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('studio_id');
 
             $table->string('total_amount');
-            $table->enum('status', ['booked', 'cancelled', 'pending'])->default('pending');
+            $table->enum('status', allowed: ['booked', 'cancelled', 'pending'])->default('pending');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at')->nullable();
             $table->string('payment_link')->nullable(); // link pembayaran
@@ -29,7 +29,7 @@ return new class extends Migration
 
             $table->boolean('recon_status')->default(false);
             $table->unsignedBigInteger('recon_id')->nullable();
-            $table->enum('payment_status', ['success', 'pending', 'failed'])->default(null)->nullable();
+            $table->enum('payment_status', allowed: ['success', 'pending', 'failed'])->default(null)->nullable();
             $table->unsignedBigInteger('payment_time')->nullable()->default(null);
             
             $table->foreign('user_id')->references('id')->on('users');

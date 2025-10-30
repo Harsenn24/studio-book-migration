@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('transaction_id');
             $table->string('uuid', 60);
             $table->string('partner_reference_no', 60);
-            $table->string('reference_no', 60);
+            $table->string('original_reference_no', 60);
             $table->unsignedBigInteger('studio_id');
             $table->string('total_amount', 255);
             $table->enum('payment_status', ['success', 'cancelled', 'pending'])->default('pending');
