@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique()->comment('UUID unik untuk setiap transaksi');
             $table->enum('type', ['booking', 'subscription', 'disbursement'])
-                  ->comment('Tipe transaksi: booking, subscription, atau disbursement');
+                ->comment('Tipe transaksi: booking, subscription, atau disbursement');
+            $table->string("partner_reference_no")->unique();
+            $table->string("original_reference_no")->unique();
             $table->bigInteger('created_at')->comment('Waktu pembuatan dalam format epoch');
             $table->bigInteger('updated_at')->nullable()->comment('Waktu update dalam format epoch');
         });
