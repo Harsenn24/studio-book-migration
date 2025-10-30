@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('payment_status', ['success', 'cancelled', 'pending'])->default('pending');
             $table->boolean('subscription_status')->default(false);
             $table->bigInteger('payment_expired_at');
-            $table->bigInteger('subscription_expired_at');
+            $table->bigInteger('subscription_expired_at')->nullable();
             $table->bigInteger('created_at');
             $table->bigInteger('updated_at');
             $table->text('payment_link');
