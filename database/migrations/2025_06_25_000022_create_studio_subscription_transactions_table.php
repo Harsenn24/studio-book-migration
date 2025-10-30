@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('studio_subscription_transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('transaction_id');
             $table->string('uuid', 60);
             $table->string('partner_reference_no', 60);
             $table->string('reference_no', 60);
@@ -29,6 +30,8 @@ return new class extends Migration
 
             // Relasi ke tabel studios
             $table->foreign('studio_id')->references('id')->on('studios')->onDelete('cascade');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
+
         });
     }
 

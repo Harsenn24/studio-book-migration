@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('booking_transactions', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
+            $table->unsignedBigInteger('transaction_id');
             $table->string("partner_reference_no")->unique();
             $table->string("original_reference_no")->unique();
             $table->unsignedBigInteger('user_id');
@@ -34,6 +35,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('recon_id')->references('id')->on('recons');
             $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('transaction_id')->references('id')->on('transactions');
+
 
         });
     }

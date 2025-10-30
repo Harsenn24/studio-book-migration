@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('disbursement_transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('recon_id');
             $table->unsignedBigInteger('studio_id');
             $table->string('amount');
@@ -25,6 +26,9 @@ return new class extends Migration
 
             $table->foreign('recon_id')->references('id')->on('recons')->onDelete('cascade');
             $table->foreign('studio_id')->references('id')->on('studios')->onDelete('cascade');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
+
+
         });
     }
 
