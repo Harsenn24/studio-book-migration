@@ -14,6 +14,7 @@ return new class extends Migration
         //
         Schema::create('studio_numbers', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('studio_id');
             $table->unsignedInteger('studio_number');;
             $table->unsignedBigInteger('created_at');

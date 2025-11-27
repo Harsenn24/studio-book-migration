@@ -15,9 +15,11 @@ return new class extends Migration
         Schema::create('studio_submissions', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255)->unique();
+            $table->uuid('uuid')->unique();
             $table->enum('status', ['rejected', 'submission', 'accepted'])->default('submission');
+            $table->text('notes')->nullable();
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
-
+            $table->unsignedBigInteger('estimated_studio_number')->nullable();
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
         });

@@ -14,6 +14,7 @@ return new class extends Migration
 
         Schema::create('studios', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
             $table->unsignedBigInteger('studio_submission_id');
             $table->text('description')->nullable();

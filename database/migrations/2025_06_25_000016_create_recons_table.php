@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('recons', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('studio_id');
             $table->string('real_amount')->comment('amount - fee');
             $table->string('amount')->comment('total amount dari booking transactions');
