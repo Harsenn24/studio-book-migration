@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('date_id');
             $table->unsignedTinyInteger('start_hour_id');
             $table->unsignedTinyInteger('end_hour_id');
+            $table->boolean('is_operational')->default(true);
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
