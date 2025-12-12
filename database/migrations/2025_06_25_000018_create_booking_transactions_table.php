@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("original_reference_no")->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('studio_id');
+            $table->unsignedBigInteger('studio_number_id');
 
             $table->string('total_amount');
             $table->enum('status', allowed: ['booked', 'cancelled', 'pending'])->default('pending');
@@ -35,6 +36,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('recon_id')->references('id')->on('recons');
             $table->foreign('studio_id')->references('id')->on('studios');
+            $table->foreign('studio_number_id')->references('id')->on('studio_numbers');
             $table->foreign('transaction_id')->references('id')->on('transactions');
 
 
