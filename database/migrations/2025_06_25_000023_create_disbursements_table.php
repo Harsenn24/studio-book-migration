@@ -22,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'success', 'failed'])->default('pending');
             $table->bigInteger('disbursement_time')->nullable();
             $table->unsignedBigInteger('bank_id');
+            $table->string('bank_account');
             $table->string(column: 'bank_account_name');
             $table->bigInteger('created_at');
             $table->bigInteger('updated_at');
