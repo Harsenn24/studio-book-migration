@@ -21,13 +21,14 @@ return new class extends Migration
             $table->string('partner_reference_no', 60);
             $table->enum('status', ['pending', 'success', 'failed'])->default('pending');
             $table->bigInteger('disbursement_time')->nullable();
+            $table->unsignedBigInteger('bank_id');
+            $table->string(column: 'bank_account_name');
             $table->bigInteger('created_at');
             $table->bigInteger('updated_at');
-
             $table->foreign('recon_id')->references('id')->on('recons')->onDelete('cascade');
             $table->foreign('studio_id')->references('id')->on('studios')->onDelete('cascade');
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
-
+            $table->foreign('bank_id')->references('id')->on('banks')->onDelete('cascade');
 
         });
     }
