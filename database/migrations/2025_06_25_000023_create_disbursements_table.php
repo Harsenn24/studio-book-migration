@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('disbursement_transactions', function (Blueprint $table) {
             $table->id();
-            $table->string('transaction_id', 60)->unique();
+            $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('recon_id');
             $table->unsignedBigInteger('studio_id');
             $table->string('amount');
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('disbursements');
+        Schema::dropIfExists('disbursement_transactions');
     }
 };
