@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_logs', function (Blueprint $table) {
+        Schema::create('email_loggers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('action');
-            $table->boolean('success')->default(false); // Whether the login attempt succeeded
-            $table->text('ip_address')->nullable(); // Optional: store IP address
-            $table->text('device_id'); // 
+            $table->string('email')->nullable(); // Untuk audit
+            $table->string('type')->nullable(); // 'verification', 'reset-password', dll
+            $table->json('metadata')->nullable();
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_logs');
+        Schema::dropIfExists('email_loggers');
     }
 };

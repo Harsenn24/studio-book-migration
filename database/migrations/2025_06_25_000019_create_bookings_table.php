@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('transaction_id');
+            $table->unsignedBigInteger('booking_transaction_id');
             $table->unsignedBigInteger('studio_operation_time_id');
             $table->enum('status', ['booked', 'cancelled', 'pending'])->default('pending');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
             $table->foreign('studio_operation_time_id')->references('id')->on('studio_operation_times');
-            $table->foreign('transaction_id')->references('id')->on('transactions');
+            $table->foreign('booking_transaction_id')->references('id')->on('booking_transactions');
 
         });
     }

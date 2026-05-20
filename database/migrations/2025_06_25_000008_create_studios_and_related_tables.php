@@ -14,20 +14,26 @@ return new class extends Migration
 
         Schema::create('studios', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('name');
+            $table->unsignedBigInteger('studio_submission_id');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
+            $table->enum('status', ['active', 'inactive', 'freezed'])->default('inactive');
 
-            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('studio_submission_id')->references('id')->on('studio_submissions');
+
 
         });
 
 
         Schema::create('studio_addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('studio_id');
+            $table->unsignedBigInteger('studio_submission_id');
+            $table->unsignedBigInteger('studio_id')->nullable();
             $table->unsignedBigInteger('province_id');
             $table->unsignedBigInteger('city_id');
             $table->unsignedBigInteger('district_id');
@@ -38,6 +44,7 @@ return new class extends Migration
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
+            $table->foreign('studio_submission_id')->references('id')->on('studio_submissions');
             $table->foreign('studio_id')->references('id')->on('studios');
             $table->foreign('province_id')->references('id')->on('provinces');
             $table->foreign('city_id')->references('id')->on('cities');
@@ -47,12 +54,14 @@ return new class extends Migration
 
         Schema::create('studio_contact_persons', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('studio_id');
+            $table->unsignedBigInteger('studio_submission_id');
+            $table->unsignedBigInteger('studio_id')->nullable();
             $table->string('name');
             $table->string('phone');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
+            $table->foreign('studio_submission_id')->references('id')->on('studio_submissions');
             $table->foreign('studio_id')->references('id')->on('studios');
         });        
     }

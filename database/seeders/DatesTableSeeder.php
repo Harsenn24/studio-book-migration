@@ -16,8 +16,8 @@ class DatesTableSeeder extends Seeder
     public function run(): void
     {
         //
-        $startDate = Carbon::create(2023, 1, 1);
-        $endDate = Carbon::create(2025, 12, 31);
+        $startDate = Carbon::create(2025, 10, 9);
+        $endDate = Carbon::create(2026, 10, day: 9);
 
         $batchSize = 500; // untuk batch insert
         $batch = [];
