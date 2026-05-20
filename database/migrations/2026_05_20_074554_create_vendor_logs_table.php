@@ -15,7 +15,7 @@ return new class extends Migration
 
             // Primary key auto increment
             $table->id();
-            $table->unsignedBigInteger('user_id', 36);
+            // $table->unsignedBigInteger('user_id', 36);
             $table->unsignedBigInteger('status')->default(0);
             $table->string('vendor_name', 255);
             $table->text('url_request');
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 

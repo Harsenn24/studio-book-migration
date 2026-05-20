@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->unique();
+            // $table->unsignedBigInteger('user_id')->unique();
             $table->string('action');
             $table->boolean('success')->default(false); // Whether the login attempt succeeded
             $table->text('ip_address')->nullable(); // Optional: store IP address

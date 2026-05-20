@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('email_loggers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            // $table->unsignedBigInteger('user_id');
             $table->string('email')->nullable(); // Untuk audit
             $table->string('type')->nullable(); // 'verification', 'reset-password', dll
             $table->json('metadata')->nullable();
