@@ -15,9 +15,7 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->unsignedBigInteger('studio_id');
-            $table->string('real_amount')->comment('amount - fee');
-            $table->string('amount')->comment('total amount dari booking transactions');
-            $table->string('fee')->comment('total_transactions x [jumlah fee]');
+            $table->string('total_amount')->comment('total amount dari booking transactions');
             $table->string('total_transactions');
             $table->bigInteger('period_start')->nullable();
             $table->bigInteger('period_end')->nullable();

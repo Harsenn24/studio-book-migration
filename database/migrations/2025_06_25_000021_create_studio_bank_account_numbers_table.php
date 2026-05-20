@@ -14,27 +14,21 @@ return new class extends Migration
     {
         Schema::create('studio_bank_account_numbers', function (Blueprint $table) {
             $table->id();
-            
-            // Relasi ke tabel studio_submissions
             $table->unsignedBigInteger('studio_submission_id');
-            $table->foreign('studio_submission_id')
-                  ->references('id')
-                  ->on('studio_submissions')
-                  ->onDelete('cascade');
-            
-            // Relasi opsional ke tabel studios
             $table->unsignedBigInteger('studio_id')->nullable();
-            $table->foreign('studio_id')
-                  ->references('id')
-                  ->on('studios')
-                  ->onDelete('set null');
-            
             $table->string('bank_code');
             $table->string('bank_account_number');
-
-            // Timestamp dalam format epoch
             $table->bigInteger('created_at');
             $table->bigInteger('updated_at');
+            
+            $table->foreign('studio_submission_id')
+                ->references('id')
+                ->on('studio_submissions')
+                ->onDelete('cascade');
+            $table->foreign('studio_id')
+                ->references('id')
+                ->on('studios')
+                ->onDelete('set null');
         });
     }
 

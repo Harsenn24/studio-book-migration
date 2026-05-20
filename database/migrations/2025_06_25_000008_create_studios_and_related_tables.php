@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('studio_submission_id');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('owner_id');
+            $table->enum('status', ['active', 'inactive', 'freezed'])->default('inactive');
             $table->unsignedBigInteger('created_at');
             $table->unsignedBigInteger('updated_at');
-            $table->enum('status', ['active', 'inactive', 'freezed'])->default('inactive');
 
             $table->foreign('owner_id')->references('id')->on('users');
             $table->foreign('studio_submission_id')->references('id')->on('studio_submissions');
