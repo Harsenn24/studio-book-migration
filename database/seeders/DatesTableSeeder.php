@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
 
 class DatesTableSeeder extends Seeder
 {
@@ -15,20 +13,41 @@ class DatesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        $startDate = Carbon::create(2025, 10, 9);
-        $endDate = Carbon::create(2026, 10, day: 9);
-
-        $batchSize = 500; // untuk batch insert
+        $batchSize = 500;
         $batch = [];
 
+        // Ambil tanggal terakhir yang ada di table
+        $lastDate = DB::table('dates')
+            ->orderByDesc('date')
+            ->value('date');
+
+        // Jika belum ada data
+        if (!$lastDate) {
+
+            // Start dari hari ini
+            $startDate = Carbon::today();
+
+            // End 1 tahun dari sekarang
+            $endDate = Carbon::today()->copy()->addYear();
+
+        } else {
+
+            // Start dari sehari setelah tanggal terakhir
+            $startDate = Carbon::parse($lastDate)->addDay();
+
+            // End 1 tahun dari tanggal terakhir
+            $endDate = Carbon::parse($lastDate)->addYear();
+        }
+
+        // Generate tanggal
         while ($startDate->lte($endDate)) {
+
             $batch[] = [
                 'date' => $startDate->format('Y-m-d'),
             ];
 
-            // Batch insert setiap 500 records
-            if (count($batch) === $batchSize) {
+            // Batch insert
+            if (count($batch) >= $batchSize) {
                 DB::table('dates')->insert($batch);
                 $batch = [];
             }
@@ -36,7 +55,7 @@ class DatesTableSeeder extends Seeder
             $startDate->addDay();
         }
 
-        // Insert sisa data
+        // Insert sisa batch
         if (!empty($batch)) {
             DB::table('dates')->insert($batch);
         }
